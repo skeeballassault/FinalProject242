@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class MainView extends JPanel{
     MainView()
     {
-        JButton welcomeButton = new JButton("Welcome to the Main View!");
+        JButton welcomeButton = new JButton("Welcome!");
         add(welcomeButton);
     }
 }
