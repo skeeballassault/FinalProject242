@@ -8,12 +8,18 @@
  *
  * @author Vincent
  */
-public class InstructionsView {
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class InstructionsView extends JPanel {
+    JButton hi = new JButton("hi");
     
     InstructionsModel i_model;
     
     InstructionsView(InstructionsModel i_model){
         this.i_model = i_model;
+        add(hi);
         
     }
     
