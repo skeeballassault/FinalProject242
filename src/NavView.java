@@ -31,6 +31,7 @@ public class NavView extends JFrame{
     {
         nVpanel.removeSplash();
         nVpanel.removeMain();
+        nVpanel.removeInstructions();
         nVpanel.addOptions(o_view);        
     }
     
@@ -38,7 +39,16 @@ public class NavView extends JFrame{
     {
         nVpanel.removeSplash();
         nVpanel.removeOptions();
+        nVpanel.removeInstructions();
         nVpanel.addMain(m_view);        
+    }
+    
+    public void switchToInstructionsPanel(InstructionsView i_view)
+    {
+        nVpanel.removeSplash();
+        nVpanel.removeMain();
+        nVpanel.removeOptions();
+        nVpanel.addInstructions(i_view);        
     }
     
     
@@ -52,7 +62,9 @@ public class NavView extends JFrame{
         nVpanel.menu.mainButton.addActionListener(al);
     }       
     
-    
-    //TODO: Add listeners to switch to other Panels
+    public void addInstructionsButtonListener(ActionListener al)
+    {
+        nVpanel.menu.instructionsButton.addActionListener(al);
+    }
     
 }

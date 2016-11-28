@@ -13,6 +13,7 @@ public class NavViewPanel extends JPanel{
     
     OptionsView o_view;
     MainView m_view;
+    InstructionsView i_view;
     
     public NavViewPanel() {
         super();
@@ -21,10 +22,11 @@ public class NavViewPanel extends JPanel{
         splash = new NavViewSplashPanel();
         
         add(menu, BorderLayout.SOUTH);        
-        add(splash, BorderLayout.CENTER);                        
+        add(splash, BorderLayout.CENTER); 
+        
     }
     
-    //Note: Splash scrren is only shown on startup.  No need to navigate back to it.
+    //Note: Splash screen is only shown on startup.  No need to navigate back to it.
     
     
     public void addOptions(OptionsView o_view)
@@ -43,13 +45,20 @@ public class NavViewPanel extends JPanel{
         repaint();
     }    
     
+    public void addInstructions(InstructionsView i_view)
+    {
+        this.i_view = i_view;
+        add(i_view, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+            
     public void addSplash(NavView n_view)
     {
         add(n_view, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
-    
     
     public void removeOptions()
     {
@@ -62,6 +71,12 @@ public class NavViewPanel extends JPanel{
         if (this.m_view != null)
             remove(this.m_view);
     }    
+    
+    public void removeInstructions()
+    {
+        if (this.i_view != null)
+            remove(this.i_view);
+    }
     
     public void removeSplash()
     {

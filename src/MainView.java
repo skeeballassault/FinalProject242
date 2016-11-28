@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 /**
  *
- *  The View for your main gameplay or user interaction could go here.
+ *  The View for your main game play or user interaction could go here.
  * 
  * @author jrimland
  */

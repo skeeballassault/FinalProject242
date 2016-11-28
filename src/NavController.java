@@ -18,7 +18,10 @@ public class NavController {
     //Instance Variables for Options Model, View, and Controller
     OptionsModel o_model;
     OptionsView o_view;
-    OptionsController o_Controller;  
+    OptionsController o_controller;  
+    InstructionsModel i_model;
+    InstructionsView i_view;
+    InstructionsController i_controller;
            
     // TODO: Create instances of your MainModel and MainController once you implement them
     MainView m_view;
@@ -29,12 +32,17 @@ public class NavController {
         
         o_model = new OptionsModel();        
         o_view = new OptionsView(o_model);
-        o_Controller = new OptionsController(o_model, o_view); 
+        o_controller = new OptionsController(o_model, o_view); 
+        
+        i_model = new InstructionsModel();
+        i_view = new InstructionsView(i_model);
+        i_controller = new InstructionsController(i_model, i_view);
         
         m_view = new MainView();
                 
         n_view.addOptionsButtonListener(new OptionsButtonListener());
-        n_view.addMainButtonListener(new MainButtonListener());        
+        n_view.addMainButtonListener(new MainButtonListener());   
+        n_view.addInstructionsButtonListener(new InstructionsButtonListener());
         
     }
     class OptionsButtonListener implements ActionListener {            
@@ -53,6 +61,11 @@ public class NavController {
         }
     }         
     
-    //TODO: Add listeners on buttons to switch to other Panels
+    class InstructionsButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e)
+        {
+            n_view.switchToInstructionsPanel(i_view);
+        }
+    }
     
 }
