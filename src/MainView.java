@@ -1,5 +1,5 @@
 
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -9,9 +9,21 @@ import javax.swing.JPanel;
  * @author jrimland
  */
 public class MainView extends JPanel{
+    
+    JLabel optionLabel;
+    
+    int difficulty;
+    String size;
+    int colorAmount;
+    
+    
     MainView()
     {
-        JButton welcomeButton = new JButton("Welcome!");
-        add(welcomeButton);
+        optionLabel = new JLabel("No options selected yet.");
+        add(optionLabel);
+    }
+    
+    void setOptionLabel(int difficulty, String size, int colorAmount) {
+        optionLabel.setText("Difficulty: " + difficulty + ", size: " + size + ", colors: " + Integer.toString(colorAmount));
     }
 }

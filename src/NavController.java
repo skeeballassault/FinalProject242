@@ -46,13 +46,20 @@ public class NavController {
         c_controller = new CreditsController(c_model, c_view);
         
         m_view = new MainView();
-                
+        
+        o_controller.setMainView(m_view);
+        
         n_view.addOptionsButtonListener(new OptionsButtonListener());
         n_view.addMainButtonListener(new MainButtonListener());   
         n_view.addInstructionsButtonListener(new InstructionsButtonListener());
         n_view.addCreditsButtonListener(new CreditsButtonListener());
         
     }
+    
+    MainView getMainView() {
+        return m_view;
+    }
+    
     class OptionsButtonListener implements ActionListener {            
         public void actionPerformed(ActionEvent e)
         {            

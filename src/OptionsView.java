@@ -1,4 +1,5 @@
 
+import java.awt.event.ActionListener;
 import java.util.Hashtable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +24,18 @@ public class OptionsView extends JPanel{
         JComboBox colorAmountList;
         
         OptionsModel o_model;
+        
+        int getDifficulty() {
+            return difficulty.getValue();
+        }
+        
+        String getGridSize() {
+            return gridSizeList.getSelectedItem().toString();
+        }
+        
+        int getColorAmount() {
+            return (int)colorAmountList.getSelectedItem();
+        }
         
         OptionsView(OptionsModel o_model)
         {
@@ -60,7 +73,7 @@ public class OptionsView extends JPanel{
             
             // It may be useful to have a Save & Return button
             
-            //retButton = new JButton("Save and Return");
+            retButton = new JButton("Save and Return");
 
             add(EnterDiff);
             add(difficulty);
@@ -69,6 +82,11 @@ public class OptionsView extends JPanel{
             add(ChooseColorAmount);
             add(colorAmountList);
 
-            //add(retButton);               
+            add(retButton);
         }
+        
+        public void addRetButtonListener(ActionListener al) 
+        {    
+            retButton.addActionListener(al);
+        }    
 }
