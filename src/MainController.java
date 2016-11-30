@@ -7,4 +7,8 @@
  */
 public class MainController {
     
+    MainController(MainModel m_model, MainView m_view) {
+        
+    }
+    
 }

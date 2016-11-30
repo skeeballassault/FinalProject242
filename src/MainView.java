@@ -10,6 +10,8 @@ import javax.swing.JPanel;
  */
 public class MainView extends JPanel{
     
+    MainModel m_model;
+    
     JLabel optionLabel;
     
     int difficulty;
@@ -17,8 +19,10 @@ public class MainView extends JPanel{
     int colorAmount;
     
     
-    MainView()
+    MainView(MainModel m_model)
     {
+        this.m_model = m_model;
+        
         optionLabel = new JLabel("No options selected yet.");
         add(optionLabel);
     }

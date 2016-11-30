@@ -28,6 +28,8 @@ public class NavController {
            
     // TODO: Create instances of your MainModel and MainController once you implement them
     MainView m_view;
+    MainModel m_model;
+    MainController m_controller;
     
     public NavController(NavModel n_model, NavView n_view ) {
         this.n_model = n_model;
@@ -45,7 +47,9 @@ public class NavController {
         c_view = new CreditsView(c_model);
         c_controller = new CreditsController(c_model, c_view);
         
-        m_view = new MainView();
+        m_model = new MainModel();
+        m_view = new MainView(m_model);
+        m_controller = new MainController(m_model, m_view);
         
         o_controller.setMainView(m_view);
         
