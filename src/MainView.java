@@ -1,6 +1,9 @@
 
+import java.awt.BorderLayout;
+import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -23,8 +26,14 @@ public class MainView extends JPanel{
     {
         this.m_model = m_model;
         
+        BorderLayout border = new BorderLayout();
+        this.setLayout(border);
+        
+        this.setBorder(new EmptyBorder(20, 20, 20, 20));
+        
         optionLabel = new JLabel("No options selected yet.");
-        add(optionLabel);
+        optionLabel.setHorizontalAlignment(JLabel.CENTER);
+        add(optionLabel, BorderLayout.SOUTH);
     }
     
     void setOptionLabel(int difficulty, String size, int colorAmount) {
