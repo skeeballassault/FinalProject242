@@ -1,4 +1,5 @@
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
 import javax.swing.JButton;
@@ -7,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -41,6 +43,10 @@ public class OptionsView extends JPanel{
         {
             this.o_model = o_model;
             
+            GridLayout grid = new GridLayout(4,3);
+            setLayout(grid);
+            
+            this.setBorder(new EmptyBorder(20, 20, 20, 20));
             
             difficulty = new JSlider(JSlider.HORIZONTAL, 1,3,1);
             difficulty.setMajorTickSpacing(1);

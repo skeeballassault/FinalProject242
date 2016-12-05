@@ -14,6 +14,7 @@ public class App {
         NavController controller = new NavController(model, view);
         
         view.setVisible(true);
+        view.setResizable(false);
         
     }
 }
