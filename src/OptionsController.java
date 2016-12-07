@@ -34,7 +34,7 @@ public class OptionsController {
     class RetButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e)
         {
-            m_view.setOptionLabel(o_view.getDifficulty(), o_view.getGridSize(), o_view.getColorAmount());
+            m_view.makeBoard(o_view.getDifficulty(), o_view.getGridSize(), o_view.getColorAmount());
         }
     }
     

@@ -31,8 +31,8 @@ public class OptionsView extends JPanel{
             return difficulty.getValue();
         }
         
-        String getGridSize() {
-            return gridSizeList.getSelectedItem().toString();
+        int getGridSize() {
+            return gridSizeList.getSelectedIndex();  
         }
         
         int getColorAmount() {
