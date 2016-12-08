@@ -14,7 +14,7 @@ public class Cell {
     boolean checked;
     
     Cell(){
-        
+        this.checked = false;
     }
     
     void setColor(int color) {

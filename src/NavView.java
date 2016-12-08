@@ -19,7 +19,7 @@ public class NavView extends JFrame{
         super("Primary View");
         this.model = model;
                           
-        setSize(700, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         nVpanel = new NavViewPanel();

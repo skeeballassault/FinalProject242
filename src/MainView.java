@@ -17,15 +17,23 @@ import javax.swing.border.EmptyBorder;
 public class MainView extends JPanel implements MouseListener{
     
     MainModel m_model;
-    JLabel optionLabel;
+    JLabel mainLabel;
     
     int difficulty;
     int size;
     int colorAmount;
-    int[][] colors;
+    
+    int maxTurns;
+    
+    int turnCounter;
+    
+    String winText;
+    
+    Cell[][] cells;
     int xPos;
     int yPos;
     int colorClicked;
+    int priorColor;
 
     MainView(MainModel m_model)
     {
@@ -38,9 +46,9 @@ public class MainView extends JPanel implements MouseListener{
         
         this.setBorder(new EmptyBorder(20, 20, 20, 20));
         
-        optionLabel = new JLabel("No options selected yet.");
-        optionLabel.setHorizontalAlignment(JLabel.CENTER);
-        add(optionLabel, BorderLayout.SOUTH);
+        mainLabel = new JLabel("No options selected yet.");
+        mainLabel.setHorizontalAlignment(JLabel.CENTER);
+        add(mainLabel, BorderLayout.SOUTH);
         
     }
     
@@ -60,24 +68,17 @@ public class MainView extends JPanel implements MouseListener{
             this.size = 22;
         if(size == 6)
             this.size = 26;
-        if(colorAmount == 3)
-            this.colorAmount = 3;
-        if(colorAmount == 4)
-            this.colorAmount = 4;
-        if(colorAmount == 5)
-            this.colorAmount = 5;
-        if(colorAmount == 6)
-            this.colorAmount = 6;
-        if(colorAmount == 7)
-            this.colorAmount = 7;
-        if(colorAmount == 8)
-            this.colorAmount = 8;
-        colors = new int[this.size][this.size];
+        this.colorAmount = colorAmount;
+        cells = new Cell[this.size][this.size];
         for(int i = 0; i < this.size; i++){
             for(int j = 0; j < this.size; j++){
-                colors[i][j] = (int)(Math.random()*100) % this.colorAmount;
+                cells[i][j] = new Cell();
+                cells[i][j].setColor((int)(Math.random()*100) % this.colorAmount);
             }
         }
+        maxTurns = (int) (Math.floor(this.size + (2 * this.colorAmount)) - this.difficulty + 10);
+        mainLabel.setText(turnCounter + "/" + maxTurns);
+        turnCounter = 0;
     }
     
     @Override
@@ -87,7 +88,7 @@ public class MainView extends JPanel implements MouseListener{
         
         for(int i = 0; i < this.size; i++){
             for(int j = 0; j < this.size; j++){
-                g.setColor(colorArray[colors[i][j]]);
+                g.setColor(colorArray[cells[i][j].getColor()]);
                 g.fillRect((j * 20), (i * 20), 20, 20);
             }
         }
@@ -95,11 +96,77 @@ public class MainView extends JPanel implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(xPos < 20*this.size && yPos <20*this.size){
             xPos = e.getX();
             yPos = e.getY();
-            colorClicked = colors[yPos/20][xPos/20];
-            System.out.println(xPos/20 + " X " + yPos/20 + " " + colorClicked);
+            if(xPos < 20*this.size && yPos <20*this.size){
+                colorClicked = cells[yPos/20][xPos/20].getColor();
+                
+                priorColor = cells[0][0].getColor();
+                cells[0][0].setColor(colorClicked);
+                
+                //Game logic
+                cellCheck(0, 0, colorClicked, priorColor);
+                
+                //Repaint all cells
+                this.repaint();
+                
+                //Reset checked marker
+                boolean win = true;
+                for(int i = 0; i < this.size; i++){
+                    for(int j = 0; j < this.size; j++){
+                        if (cells[i][j].getColor() != colorClicked) {
+                            win = false;
+                        }
+                        cells[i][j].setChecked(false);
+                    }
+                }
+                
+                winText = "";
+                if (win) {
+                    winText = "<font color=green> - You win! </font>";
+                }
+                
+                turnCounter++;
+                if (turnCounter > maxTurns) {
+                    mainLabel.setForeground(Color.red);
+                }
+                mainLabel.setText(turnCounter + "/" + maxTurns + winText);
+                
+        }
+    }
+    
+    public void cellCheck(int x, int y, int colorClicked, int priorColor) {
+        try {
+        if (x - 1 > 0) {
+            if ( cells[x-1][y].getColor() == priorColor && !(cells[x-1][y].getChecked()) ) {
+                cells[x-1][y].setColor(colorClicked);
+                cellCheck(x - 1, y, colorClicked, priorColor);
+                cells[x-1][y].setChecked(true);
+            }
+        }
+        if (y - 1 > 0) {
+            if ( cells[x][y-1].getColor() == priorColor && !(cells[x][y-1].getChecked()) ) {
+                cells[x][y-1].setColor(colorClicked);
+                cellCheck(x, y - 1, colorClicked, priorColor);
+                cells[x][y-1].setChecked(true);
+            }
+        }
+        if (x + 1 > 0) {
+            if ( cells[x+1][y].getColor() == priorColor && !(cells[x+1][y].getChecked()) ) {
+                cells[x+1][y].setColor(colorClicked);
+                cellCheck(x + 1, y, colorClicked, priorColor);
+                cells[x+1][y].setChecked(true);
+            }
+        }
+        if (y + 1 > 0) {
+            if ( cells[x][y+1].getColor() == priorColor && !(cells[x][y+1].getChecked()) ) {
+                cells[x][y+1].setColor(colorClicked);
+                cellCheck(x, y + 1, colorClicked, priorColor);
+                cells[x][y+1].setChecked(true);
+            }
+        }
+        } catch (StackOverflowError e) {
+            
         }
     }
 
