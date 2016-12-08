@@ -76,7 +76,7 @@ public class MainView extends JPanel implements MouseListener{
                 cells[i][j].setColor((int)(Math.random()*100) % this.colorAmount);
             }
         }
-        maxTurns = (int) (Math.floor(this.size + (2 * this.colorAmount)) - this.difficulty + 10);
+        maxTurns = (int) (Math.floor(this.size + (2 * this.colorAmount)) - (this.difficulty * 3) + 15);
         mainLabel.setText(turnCounter + "/" + maxTurns);
         turnCounter = 0;
     }
